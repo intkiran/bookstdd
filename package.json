@@ -4,8 +4,31 @@
   "description": "Books Order Calculator",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "prestart": "npm install",
+    "test": "mocha test/*.test.ts",
+    "start": "npm run lint && npm run test:watch",
+    "test:watch": "npm test -- --watch",
+    "build": "tsc --pretty",
+    "build:watch": "tsc --pretty --watch",
+    "build:web": "webpack --watch",
+    "live": "live-server",
+    "web": "npm-run-all --parallel web:ts build:web live",
+    "web:ts": "watch 'tsc --pretty --outDir dist/trash > tsc.log' src/",
+    "lint": "tslint \"./src/01_intro.ts\" --formatters-dir=\"./node_modules/tslint-stylish\" --format=\"stylish\"   --exclude=\"./test/*.ts\" "
   },
-  "author": "",
-  "license": "ISC"
+  "author": "Kiran Babu",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/chai": "^4.2.0",
+    "@types/mocha": "^5.2.7",
+    "chai": "^4.2.0",
+    "karma": "^4.2.0",
+    "mocha": "^6.2.0",
+    "ts-node": "^8.3.0",
+    "ts-node-warnings": "^1.6.0",
+    "tslint": "^5.18.0",
+    "typescript": "^3.5.3",
+    "watch": "^1.0.2",
+    "webpack": "^4.39.2"
+  }
 }
